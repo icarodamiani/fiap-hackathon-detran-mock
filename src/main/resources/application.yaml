@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: fiap-hackathon-detran-mock
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak.local:7777/auth/realms/vodafone
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  cors:
+    allowed-origins: "http://localhost:8080"
+    allowed-headers: "Authorization, Content-Type, Accept"
+    allowed-methods: "GET,POST,PUT,DELETE,OPTIONS,HEAD,TRACE,CONNECT,PATCH"
+    max-age: 300
+
+aws:
+  accessKeyId: local
+  secretAccessKey: local
+  region: us-west-2
+  dynamo:
+    uri: http://localhost:8000
+  sqs:
+    uri: http://localhost:9324
+    numberOfMessages: 5
+    waitTimeMessage: 10
+    visibilityTimeOut: 30
+    emitirDocumentoQueue:
+      queue: detran_documentos_emitir_queue
+      delay: 1000
+      poolSize: 1
+
+management:
+  health:
+    probes:
+      enabled: true
+  endpoint:
+    loggers:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+      show-details: "ALWAYS"
+  endpoints:
+    web:
+      exposure:
+        include: "*"
