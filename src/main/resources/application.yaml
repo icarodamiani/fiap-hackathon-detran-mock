@@ -5,7 +5,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${OIDC_PROVIDER_ISSUER:http://localhost:7777/auth/realms/vodafone}
+          issuer-uri: ${OIDC_PROVIDER_ISSUER:http://dockerhost:7777/auth/realms/vodafone}
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
@@ -16,7 +16,6 @@ spring:
     max-age: 300
 
 aws:
-  region: ${AWS_REGION:us-east-1}
   sqs:
     numberOfMessages: 5
     waitTimeMessage: 10

@@ -1,6 +1,8 @@
 package io.fiap.hackathon.driven.core.configuration;
 
 import java.net.URI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 
 @Configuration
 public class SqsConfiguration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SqsConfiguration.class);
 
     @Value("${aws.accessKeyId:}")
     private String accessKeyId;
@@ -30,7 +33,10 @@ public class SqsConfiguration {
 
     @Bean
     public SqsAsyncClient sqsAsyncClient() {
+        LOGGER.error("Uri "+ uri+" Region" + region);
+
         if (StringUtils.hasText(uri)) {
+            LOGGER.error("SQS local");
             return SqsAsyncClient.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(
                     AwsBasicCredentials.create(accessKeyId, secretAccessKey)))
@@ -39,7 +45,7 @@ public class SqsConfiguration {
                 .region(Region.of(region))
                 .build();
         }
-
+        LOGGER.error("SQS remote");
         return SqsAsyncClient.builder()
             .region(DefaultAwsRegionProviderChain.builder().build().getRegion())
             .credentialsProvider(WebIdentityTokenFileCredentialsProvider.create())

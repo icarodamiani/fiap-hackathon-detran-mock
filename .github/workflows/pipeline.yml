@@ -97,7 +97,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
           aws-region: ${{ env.REGION }}
           cluster-name: fiap-hackathon
-          config-files: chart/detran/values.yaml
+          config-files: chart/detran/profiles/values.yaml
           chart-path: chart/detran/
           namespace: dev
           values: env[0].value=${{ inputs.oidc_provider_issuer }}

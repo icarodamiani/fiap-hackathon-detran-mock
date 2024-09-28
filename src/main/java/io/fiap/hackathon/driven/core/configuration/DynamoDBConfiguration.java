@@ -1,6 +1,8 @@
 package io.fiap.hackathon.driven.core.configuration;
 
 import java.net.URI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 
 @Configuration
 public class DynamoDBConfiguration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamoDBConfiguration.class);
 
     @Value("${aws.accessKeyId:}")
     private String accessKeyId;
@@ -30,7 +33,9 @@ public class DynamoDBConfiguration {
 
     @Bean
     public DynamoDbAsyncClient dynamoDbAsyncClient() {
+        LOGGER.error("Uri "+ uri+" Region" + region);
         if (StringUtils.hasText(uri)) {
+            LOGGER.error("Dynamo local");
             return DynamoDbAsyncClient.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(
                     AwsBasicCredentials.create(accessKeyId, secretAccessKey)))
@@ -39,6 +44,7 @@ public class DynamoDBConfiguration {
                 .region(Region.of(region))
                 .build();
         }
+        LOGGER.error("Dynamo remote");
 
         return DynamoDbAsyncClient.builder()
             .region(DefaultAwsRegionProviderChain.builder().build().getRegion())

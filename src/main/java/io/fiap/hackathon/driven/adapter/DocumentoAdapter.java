@@ -32,7 +32,7 @@ public class DocumentoAdapter implements DocumentoPort {
     public DocumentoAdapter(MessagingPort messagingPort,
                             DocumentoRepository repository,
                             ObjectMapper objectMapper,
-                            @Value("${aws.sqs.emitirDocumentoQueue.queue}")
+                            @Value("${aws.sqs.emitirDocumentoQueue.queue:detran_documentos_emitir_queue}")
                             String queue) {
         this.messagingPort = messagingPort;
         this.repository = repository;
