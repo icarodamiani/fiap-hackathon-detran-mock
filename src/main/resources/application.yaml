@@ -5,7 +5,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak.local:7777/auth/realms/vodafone
+          issuer-uri: ${OIDC_PROVIDER_ISSUER:http://localhost:7777/auth/realms/vodafone}
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
@@ -16,17 +16,12 @@ spring:
     max-age: 300
 
 aws:
-  accessKeyId: local
-  secretAccessKey: local
-  region: us-west-2
-  dynamo:
-    uri: http://localhost:8000
+  region: ${AWS_REGION:us-east-1}
   sqs:
-    uri: http://localhost:9324
     numberOfMessages: 5
     waitTimeMessage: 10
     visibilityTimeOut: 30
-    emitirDocumentoQueue:
+    documentosEmitir:
       queue: detran_documentos_emitir_queue
       delay: 1000
       poolSize: 1
