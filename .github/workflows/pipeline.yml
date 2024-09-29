@@ -106,3 +106,4 @@ jobs:
           namespace: dev
           values: env[0].value=${{ inputs.oidc_provider_issuer }}
           name: detran
+          version: ${{ inputs.tag }}
