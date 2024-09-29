@@ -24,9 +24,8 @@ ingress:
   hosts:
     - host:
       paths:
-        - path: /detran/
+        - path: /
           pathType: Prefix
-          portName: http
 
 resources: { }
 podAnnotations: { }

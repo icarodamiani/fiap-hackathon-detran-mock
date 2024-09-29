@@ -23,7 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping(value = "/v1/detran/documentos", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/detran/documentos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DetranDocumentoController {
     private static final Logger LOGGER = getLogger(DetranDocumentoController.class);
     private final DocumentoMapper mapper;

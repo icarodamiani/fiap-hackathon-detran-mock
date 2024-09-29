@@ -14,14 +14,7 @@ service:
   port: 8080
 
 ingress:
-  enabled: true
-  className: "nginx"
-  hosts:
-    - host: "detran.local.io"
-      paths:
-        - path: /detran/
-          pathType: Prefix
-          portName: http
+  enabled: false
 
 resources: { }
 podAnnotations: { }
