@@ -8,6 +8,10 @@ on:
         type: string
         required: true
         description: 'Oidc provider issuer uri:'
+      tag:
+        type: string
+        required: true
+        description: 'Version to deploy:'
 
 env:
   REGION: "us-east-1"
@@ -83,7 +87,7 @@ jobs:
           file: Multistage.Dockerfile
           load: false
           push: true
-          tags: icarodamiani/fiap-hackathon-detran-mock:latest
+          tags: icarodamiani/fiap-hackathon-detran-mock:${{ inputs.tag }}
 
       - name: Install Helm
         uses: azure/setup-helm@v4
