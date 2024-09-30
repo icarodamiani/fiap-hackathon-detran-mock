@@ -35,7 +35,7 @@ public class DocumentoService {
 
     private Function1<Documento, Mono<Documento>> handle() {
         return documento -> documentoPort.update(documento.getId(),
-                "[{\"op\": \"replace\",\"path\": \"/EMITIDO\",\"value\": \"true\"}]")
+                "[{\"op\": \"replace\",\"path\": \"/emitido\",\"value\": \"true\"}]")
             .then(this.notify(documento).map(unused -> documento));
     }
 

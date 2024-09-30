@@ -2,6 +2,7 @@ package io.fiap.hackathon.driven.core.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import javax.annotation.Nullable;
 import org.immutables.value.Value;
 
 @JsonSerialize(as = ImmutableDocumento.class)
@@ -11,5 +12,6 @@ import org.immutables.value.Value;
 public abstract class Documento {
     public abstract String getId();
     public abstract String getWebhook();
+    @Nullable
     public abstract Boolean getEmitido();
 }
